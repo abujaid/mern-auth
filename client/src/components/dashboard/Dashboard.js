@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { logoutUser } from '../../actions/authActions'
+
 class Dashboard extends Component
 {
 
@@ -10,41 +10,40 @@ class Dashboard extends Component
     }
     render ()
     {
-        const { user } = this.props.auth
+
         return (
-            <div style={{ height: "75vh" }} className="container valign-wrapper">
-                <div className="row">
-                    <div className="col s12 center-align">
-                        <h4>
-                            <b>Hey there,</b> {user.name.split(" ")[0]}
-                            <p className="flow-text grey-text text-darken-1">
-                                You are logged into a full-stack{" "}
-                                <span style={{ fontFamily: "monospace" }}>MERN</span> app 👏
-              </p>
-                        </h4>
-                        <button
-                            style={{
-                                width: "150px",
-                                borderRadius: "3px",
-                                letterSpacing: "1.5px",
-                                marginTop: "1rem"
-                            }}
-                            onClick={this.onLogoutClick}
-                            className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                        >
-                            Logout
-                        </button>
+            <div className="container mt-5">
+                <div class="card-deck">
+                    <div class="card bg-primary">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Card title</h4>
+                            <p class="card-text">Some text inside the first card</p>
+                        </div>
+                    </div>
+                    <div class="card bg-warning">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Card title</h4>
+                            <p class="card-text">Some text inside the second card</p>
+                        </div>
+                    </div>
+                    <div class="card bg-success">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Card title</h4>
+                            <p class="card-text">Some text inside the third card</p>
+                        </div>
+                    </div>
+                    <div class="card bg-danger">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Card title</h4>
+                            <p class="card-text">Some text inside the fourth card</p>
+                        </div>
                     </div>
                 </div>
+
             </div>
 
         )
     }
 }
-const mapStateToProps = state =>
-{
-    return {
-        auth: state.auth
-    }
-}
-export default connect(mapStateToProps, { logoutUser })(Dashboard)
+
+export default connect(null)(Dashboard)

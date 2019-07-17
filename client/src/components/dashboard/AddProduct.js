@@ -42,7 +42,7 @@ class AddProduct extends Component
                             <div className="card-body">
                                 <form action="" onSubmit={this.handleSubmit}>
                                     <div className="form-group">
-                                        <label htmlFor="title">Product Title</label>
+                                        <label htmlFor="title">Product Name</label>
                                         <input type="text" className="form-control"
                                             name="title"
                                             value={title}

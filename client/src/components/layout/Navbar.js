@@ -70,8 +70,8 @@ class Navegation extends Component
         )
         return (
             <div>
-                <Navbar color="light" light expand="md">
-                    <NavbarBrand href="/">reactstrap</NavbarBrand>
+                <Navbar color="danger" light expand="md">
+                    <NavbarBrand href="/">MERN APPLICATION</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
