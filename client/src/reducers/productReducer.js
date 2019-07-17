@@ -16,7 +16,7 @@ const productReducer = (state = initialState, action) =>
         case ADD_PRODUCT:
             return {
                 ...state,
-                products: action.payload
+                products: [action.payload, ...state.products]
             }
         case REMOVE_PRODUCT:
             return {
