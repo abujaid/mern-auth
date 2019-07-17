@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addProduct } from '../../actions/productActions'
+import classnames from "classnames";
 
 class AddProduct extends Component
 {
@@ -13,6 +14,14 @@ class AddProduct extends Component
             quantity: '',
             price: '',
             errors: {}
+        }
+    }
+    componentWillReceiveProps (nextProps)
+    {
+        if (nextProps.errors) {
+            this.setState({
+                errors: nextProps.errors
+            });
         }
     }
     handleChange = (e) =>
@@ -33,9 +42,10 @@ class AddProduct extends Component
     render ()
     {
         console.log(this.props)
+        const { errors } = this.state;
         const { title, quantity, description, price } = this.state
         return (
-            <div className="container">
+            <div className="container mt-5">
                 <div className="row">
                     <div className="col-sm-6">
                         <div className="card">
@@ -43,34 +53,50 @@ class AddProduct extends Component
                                 <form action="" onSubmit={this.handleSubmit}>
                                     <div className="form-group">
                                         <label htmlFor="title">Product Name</label>
-                                        <input type="text" className="form-control"
+                                        <p className="red-text">{errors.title}</p>
+                                        <input type="text"
                                             name="title"
                                             value={title}
                                             onChange={this.handleChange}
+                                            className={classnames("form-control", {
+                                                invalid: errors.title
+                                            })}
                                         />
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="quantity">Product Quantity</label>
-                                        <input type="number" className="form-control"
+                                        <p className="red-text">{errors.quantity}</p>
+                                        <input type="number"
                                             name="quantity"
                                             value={quantity}
                                             onChange={this.handleChange}
+                                            className={classnames("form-control", {
+                                                invalid: errors.quantity
+                                            })}
                                         />
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="price">Product Price</label>
-                                        <input type="number" className="form-control"
+                                        <p className="red-text">{errors.price}</p>
+                                        <input type="number"
                                             name="price"
                                             value={price}
                                             onChange={this.handleChange}
+                                            className={classnames("form-control", {
+                                                invalid: errors.price
+                                            })}
                                         />
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="desc">Product Description</label>
-                                        <textarea id="" cols="5" rows="5" className="form-control"
+                                        <p className="red-text">{errors.description}</p>
+                                        <textarea id="" cols="5" rows="5"
                                             name="description"
                                             value={description}
                                             onChange={this.handleChange}
+                                            className={classnames("form-control", {
+                                                invalid: errors.description
+                                            })}
                                         ></textarea>
                                     </div>
                                     <div className="form-group">
@@ -88,7 +114,8 @@ class AddProduct extends Component
 const mapStateToProps = state =>
 {
     return {
-        product: state.product
+        product: state.product,
+        errors: state.errors
     }
 }
 export default connect(mapStateToProps, { addProduct })(AddProduct)

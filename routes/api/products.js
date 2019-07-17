@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-
+const validateProductInput = require('../../validation/product')
 const Product = require("../../models/Product");
 
 // @route GET api/products
@@ -14,14 +14,20 @@ router.get('/', passport.authenticate("jwt", { session: false }), (req, res) =>
         .then(products => res.json(products));
 });
 
-// @route POST api/tasks/create
+// @route POST api/products/create
 // @desc Create a new task
 // @access Private
 router.post(
-    "/add-product",
+    "/create",
     passport.authenticate("jwt", { session: false }),
+
     (req, res) =>
     {
+        const { errors, isValid } = validateProductInput(req.body);
+        // Check validation
+        if (!isValid) {
+            return res.status(400).json(errors);
+        }
         const NEW_PRODUCT = new Product({
             title: req.body.title,
             description: req.body.description,

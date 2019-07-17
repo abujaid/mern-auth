@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GET_PRODUCT, ADD_PRODUCT, REMOVE_PRODUCT } from '../actions/types'
+import { GET_PRODUCT, ADD_PRODUCT, REMOVE_PRODUCT, GET_ERRORS } from '../actions/types'
 
 export const getProducts = () =>
 {
@@ -18,12 +18,12 @@ export const addProduct = (productData) =>
 {
     return dispatch =>
     {
-        axios.post('/api/products/add-product', productData).then(res =>
+        axios.post('/api/products/create', productData).then(res =>
         {
             dispatch({ type: ADD_PRODUCT, payload: res.data })
         }).catch(err =>
         {
-            console.log(err)
+            dispatch({ type: GET_ERRORS, payload: err.response.data })
         })
     }
 }

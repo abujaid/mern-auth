@@ -70,7 +70,7 @@ class Navegation extends Component
         )
         return (
             <div>
-                <Navbar color="danger" light expand="md">
+                <Navbar color="primary" light expand="md">
                     <NavbarBrand href="/">MERN APPLICATION</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
