@@ -11,6 +11,7 @@ class AddProduct extends Component
             title: '',
             description: '',
             quantity: '',
+            price: '',
             errors: {}
         }
     }
@@ -24,14 +25,15 @@ class AddProduct extends Component
         const productData = {
             title: this.state.title,
             quantity: this.state.quantity,
-            description: this.state.description
+            description: this.state.description,
+            price: this.state.price
         }
         this.props.addProduct(productData)
     }
     render ()
     {
         console.log(this.props)
-        const { title, quantity, description } = this.state
+        const { title, quantity, description, price } = this.state
         return (
             <div className="container">
                 <div className="row">
@@ -49,9 +51,17 @@ class AddProduct extends Component
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="quantity">Product Quantity</label>
-                                        <input type="text" className="form-control"
+                                        <input type="number" className="form-control"
                                             name="quantity"
                                             value={quantity}
+                                            onChange={this.handleChange}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="price">Product Price</label>
+                                        <input type="number" className="form-control"
+                                            name="price"
+                                            value={price}
                                             onChange={this.handleChange}
                                         />
                                     </div>

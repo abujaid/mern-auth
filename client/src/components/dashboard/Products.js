@@ -1,11 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getProducts } from '../../actions/productActions'
+import { Redirect } from 'react-router-dom'
+import { getProducts, removeProduct } from '../../actions/productActions'
 class Products extends Component
 {
     componentDidMount ()
     {
         this.props.getProducts()
+    }
+    onRemove = (id) =>
+    {
+        this.props.removeProduct(id)
+
+
     }
     render ()
     {
@@ -18,8 +25,9 @@ class Products extends Component
                         <table className="table">
                             <thead>
                                 <tr>
-                                    <th>Title</th>
-                                    <th>Quantity</th>
+                                    <th>Product Name</th>
+                                    <th>Product Qty</th>
+                                    <th>Product Price</th>
                                     <th>Description</th>
                                 </tr>
                             </thead>
@@ -29,9 +37,10 @@ class Products extends Component
                                         <tr key={product._id}>
                                             <td>{product.title}</td>
                                             <td>{product.quantity}</td>
+                                            <td>{product.price}</td>
                                             <td>{product.description}</td>
                                             <td>
-                                                <button className="btn btn-danger">Remove</button>
+                                                <button onClick={() => this.onRemove(product._id)} className="btn btn-danger" >Remove</button>
                                             </td>
                                         </tr>
                                     )
@@ -52,4 +61,4 @@ const mapStateToProps = state =>
         products: state.poroduct
     }
 }
-export default connect(mapStateToProps, { getProducts })(Products)
+export default connect(mapStateToProps, { getProducts, removeProduct })(Products)
