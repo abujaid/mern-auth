@@ -5,7 +5,6 @@ const validateProductInput = require('../../validation/product')
 const Product = require("../../models/Product");
 
 // @route GET api/products
-// @desc Get tasks for specific project
 // @access Private
 router.get('/', passport.authenticate("jwt", { session: false }), (req, res) =>
 {
@@ -44,7 +43,10 @@ router.post(
             .catch(err => console.log(err));
     }
 );
-// delete
+/**
+ * route api/products/id
+ * desc:delete the product
+ */
 router.delete('/:id', passport.authenticate("jwt", { session: false }),
     (req, res) =>
     {
@@ -52,5 +54,29 @@ router.delete('/:id', passport.authenticate("jwt", { session: false }),
             .then(product => product.remove().then(() => res.json({ success: true })))
             .catch(err => res.status(404).json({ success: false }));
     });
+/**
+ * route:api/products/id
+ * desc:update product
+ */
+router.put('/:id', passport.authenticate('jwt', { session: false }),
+    (req, res) =>
+    {
+        let producttFields = {}
+        producttFields.title = req.body.title;
+        producttFields.description = req.body.description;
+
+        Product.findOneAndUpdate(
+            { _id: req.body.id },
+            { $set: producttFields },
+            { new: true }
+        )
+            .then(product =>
+            {
+                res.json(product);
+            })
+            .catch(err => console.log(err));
+    }
+
+)
 
 module.exports = router;
