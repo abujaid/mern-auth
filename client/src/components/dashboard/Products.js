@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
 import { getProducts, removeProduct } from '../../actions/productActions'
 class Products extends Component
 {
@@ -11,8 +10,6 @@ class Products extends Component
     onRemove = (id) =>
     {
         this.props.removeProduct(id)
-
-
     }
     render ()
     {

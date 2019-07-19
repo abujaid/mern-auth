@@ -48,7 +48,6 @@ class Login extends Component
     };
     render ()
     {
-        console.log(this.props)
         const { errors } = this.state;
         return (
             <div className="container mt-5">

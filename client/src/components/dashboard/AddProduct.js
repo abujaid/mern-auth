@@ -37,7 +37,7 @@ class AddProduct extends Component
             description: this.state.description,
             price: this.state.price
         }
-        this.props.addProduct(productData)
+        this.props.addProduct(productData, this.props.history)
     }
     render ()
     {
